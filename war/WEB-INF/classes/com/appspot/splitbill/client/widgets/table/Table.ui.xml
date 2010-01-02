@@ -1,0 +1,52 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style type="com.appspot.splitbill.client.widgets.table.Table.MyStyle">
+		.controls {
+			width: 100%;
+			background-color: #92C1F0;
+			/*padding: 5px;*/
+		}
+		.wide {
+			width: 100%;
+		}
+		.topLeft {
+			font-weight: bold;
+			color: #00C;
+			background-color: #E0ECFF;
+			border-bottom-color: gray;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+		}
+		.tableHeader {
+			font-weight: bold;
+			color: #00C;
+			background-color: #E0ECFF;
+			border-bottom-color: gray;
+			border-bottom-style: solid;
+			border-bottom-width: 1px;
+			border-left-style: solid;
+			border-left-width: 1px;
+			cursor: pointer;
+			padding-left: 5px;
+		}
+		.tableRow {
+			border-bottom-style: solid;
+			border-bottom-color: gray;
+			border-bottom-width: 1px;
+			cursor: pointer;
+			padding-left: 5px;
+		}
+		.mouseOver {
+			background-color: #F4F4FF;
+		}
+		.selected {
+			background-color: #FFC;
+		}
+	</ui:style>
+		<g:VerticalPanel addStyleNames='{style.wide}' >
+			<g:HorizontalPanel ui:field="controlsTop" styleName='{style.controls}' />
+			<g:VerticalPanel ui:field="content" addStyleNames='{style.wide}' />
+			<g:HorizontalPanel ui:field="controlsBottom" styleName='{style.controls}' />
+		</g:VerticalPanel>
+</ui:UiBinder> 

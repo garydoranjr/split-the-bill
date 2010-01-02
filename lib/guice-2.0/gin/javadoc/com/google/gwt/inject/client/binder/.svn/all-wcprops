@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder
+END
+GinAnnotatedBindingBuilder.html
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinAnnotatedBindingBuilder.html
+END
+GinScopedBindingBuilder.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinScopedBindingBuilder.html
+END
+GinBinder.html
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinBinder.html
+END
+package-frame.html
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/package-frame.html
+END
+package-summary.html
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/package-summary.html
+END
+GinLinkedBindingBuilder.html
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinLinkedBindingBuilder.html
+END
+GinAnnotatedConstantBindingBuilder.html
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinAnnotatedConstantBindingBuilder.html
+END
+package-tree.html
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/package-tree.html
+END
+GinConstantBindingBuilder.html
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/55/trunk/javadoc/com/google/gwt/inject/client/binder/GinConstantBindingBuilder.html
+END
