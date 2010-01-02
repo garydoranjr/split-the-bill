@@ -1,0 +1,36 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:com.appspot.splitbill.client.widgets" >
+	<ui:style>
+		.wide {
+			width: 100%;	
+		}
+		.logo {
+			height: 30px;
+  			padding: 2px;
+		}
+		.links {
+			padding: 10px;
+		}
+		.content { width:100%; }
+	</ui:style>
+	
+	<g:VerticalPanel addStyleNames='{style.wide}'>
+	
+		<g:HorizontalPanel ui:field='headerPanel' addStyleNames='{style.wide}'>
+			<g:Image ui:field="logo" url="img/logo_big2.png" styleName='{style.logo}' />
+			<my:NotificationArea ui:field='notificationArea' />
+			<g:HorizontalPanel ui:field='linksArea' styleName='{style.links}' />
+		</g:HorizontalPanel>
+		
+		<g:HTML><hr /></g:HTML>
+		
+		<g:HorizontalPanel ui:field='contentRow' >
+			<my:GroupSelector ui:field='groupSelector' />
+			<g:VerticalPanel ui:field='contentArea' styleName='{style.content}' />
+		</g:HorizontalPanel>
+		
+	</g:VerticalPanel>
+	
+</ui:UiBinder> 

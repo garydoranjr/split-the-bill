@@ -1,0 +1,9 @@
+com.appspot.splitbill.client.EmailFrequency, false, false, true, true, com.appspot.splitbill.client.EmailFrequency/3352011232, 3352011232
+com.appspot.splitbill.client.rpc.ServiceException, true, true, false, false, com.appspot.splitbill.client.rpc.ServiceException/3785072565, 3785072565
+com.appspot.splitbill.client.rpc.ServiceException$ExceptionType, true, true, false, false, com.appspot.splitbill.client.rpc.ServiceException$ExceptionType/4245940932, 4245940932
+com.appspot.splitbill.client.rpc.SettingsService, false, false, false, false, _, 3640354979
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true, true, true, true, com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533, 3936916533
+java.lang.Exception, true, false, true, false, java.lang.Exception/1920171873, 1920171873
+java.lang.RuntimeException, true, false, true, false, java.lang.RuntimeException/515124647, 515124647
+java.lang.String, true, true, true, true, java.lang.String/2004016611, 2004016611
+java.lang.Throwable, true, false, true, false, java.lang.Throwable/2953622131, 2953622131

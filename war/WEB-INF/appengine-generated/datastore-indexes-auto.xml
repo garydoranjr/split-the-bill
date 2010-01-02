@@ -1,0 +1,25 @@
+<!-- Indices written at Sat, 2 Jan 2010 20:44:12 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="PersonJDO" ancestor="true" source="auto">
+        <property name="members_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="PaysJDO" ancestor="true" source="auto">
+        <property name="payments_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="BillJDO" ancestor="true" source="auto">
+        <property name="bills_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="GetsJDO" ancestor="true" source="auto">
+        <property name="gets_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
