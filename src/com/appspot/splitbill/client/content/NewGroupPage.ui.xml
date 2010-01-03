@@ -3,12 +3,16 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	xmlns:e="urn:import:com.appspot.splitbill.client.widgets.editor" >
 	<ui:style>
+		.boldLabel{
+			font-size: 16px;
+			font-weight: bold;
+		}
 	</ui:style>
 	<g:DecoratorPanel>
 		<g:VerticalPanel>
-			<g:Label>Group Name:</g:Label>
+			<g:Label addStyleNames='{style.boldLabel}'>Group Name:</g:Label>
 			<e:MinimumLengthTextBox ui:field="nameBox" minLength='3'/>
-			<g:Label>Description:</g:Label>
+			<g:Label addStyleNames='{style.boldLabel}'>Description:</g:Label>
 			<g:TextArea ui:field="descBox" />
 			<g:HorizontalPanel>
 				<g:Button ui:field="saveButton" >Save</g:Button>
