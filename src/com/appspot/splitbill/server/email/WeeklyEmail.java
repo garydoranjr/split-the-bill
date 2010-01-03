@@ -8,18 +8,18 @@ public class WeeklyEmail extends MultipartEmail {
 
 	public WeeklyEmail(String rcptEmail, String rcptName) throws UnsupportedEncodingException{
 		setRecipient(new InternetAddress(rcptEmail, rcptName));
-		setSender(new InternetAddress("garydoranjr@gmail.com", "Split the Bill"));
+		setSender(new InternetAddress("spltbill@gmail.com", "Split the Bill"));
 		setSubject("Your weekly update from Split the Bill");
 		setFooter(new EmailContent(){
 			@Override
 			public String getHTML() {
 				return "<hr />"+
 				"<i>To stop receiving updates, please visit "+
-				"<a href=\"split-bill.appspot.com\">split-bill.appspot.com</a>.</i>";
+				"<a href=\"split-bill.appspot.com\">split-bill.appspot.com</a> and change your settings.</i>";
 			}
 			@Override
 			public String getPlainText() {
-				return "To stop receiving updates, please visit split-bill.appspot.com.";
+				return "To stop receiving updates, please visit split-bill.appspot.com and change your Settings.";
 			}
 		});
 	}
