@@ -1,8 +1,0 @@
-com.appspot.splitbill.client.ClientUser, true, true, false, false, com.appspot.splitbill.client.ClientUser/797388305, 797388305
-com.appspot.splitbill.client.LoginInfo, true, true, false, false, com.appspot.splitbill.client.LoginInfo/995233143, 995233143
-com.appspot.splitbill.client.rpc.LoginService, false, false, false, false, _, 4211554395
-com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true, true, true, true, com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533, 3936916533
-java.lang.Exception, true, false, true, false, java.lang.Exception/1920171873, 1920171873
-java.lang.RuntimeException, true, false, true, false, java.lang.RuntimeException/515124647, 515124647
-java.lang.String, true, true, true, true, java.lang.String/2004016611, 2004016611
-java.lang.Throwable, true, false, true, false, java.lang.Throwable/2953622131, 2953622131
