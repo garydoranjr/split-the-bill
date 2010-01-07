@@ -98,7 +98,7 @@ public class PaymentsTable implements GroupContent, GroupUpdateHandler {
 		@Override
 		public void delete(List<Integer> rowsToDelete) {
 			int rowCount = rowsToDelete.size();
-			if(rowCount > 0 && promptDelete(rowCount)){
+			if(rowCount > 0 && promptDelete(rowCount, "Payment")){
 				for(Integer i : rowsToDelete){
 					Pays p = getEntry(i);
 					groupManager.removePay(group.getId(), p.getID());

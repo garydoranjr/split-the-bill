@@ -98,7 +98,7 @@ public class PersonTable implements GroupContent, GroupUpdateHandler{
 		@Override
 		public void delete(List<Integer> rowsToDelete) {
 			int rowCount = rowsToDelete.size();
-			if(rowCount > 0 && promptDelete(rowCount)){
+			if(rowCount > 0 && promptDelete(rowCount, "Person")){
 				for(Integer i : rowsToDelete){
 					Person p = getEntry(i);
 					groupManager.removePerson(group.getId(), p.getID());

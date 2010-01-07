@@ -98,8 +98,20 @@ public abstract class AbstractTableModel<E> implements TableModel {
 		return entries.size();
 	}
 	
-	protected boolean promptDelete(int howMany){
-		return Window.confirm("Are you sure you want to permanently delete these "+howMany+" entries?");
+	protected boolean promptDelete(int howMany, String... terms){
+		String message = "Are you sure you want to permanently delete ";
+		String term;
+		if(terms.length > 0){
+			term = " " + terms[Math.max(howMany, terms.length)];
+		}else{
+			term = "";
+		}
+		if(howMany > 1){
+			message += "these" + howMany + term + " entries.";
+		}else{
+			message += "this" + term + " entry.";
+		}
+		return Window.confirm(message);
 	}
 
 }
