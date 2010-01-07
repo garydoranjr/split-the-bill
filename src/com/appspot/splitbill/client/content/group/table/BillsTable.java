@@ -110,13 +110,16 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 		}
 
 		@Override
-		public void delete(List<Integer> rowsToDelete) {
+		public boolean delete(List<Integer> rowsToDelete) {
 			int rowCount = rowsToDelete.size();
 			if(rowCount > 0 && promptDelete(rowCount, "Bill")){
 				for(Integer i : rowsToDelete){
 					Bill b = getEntry(i);
 					groupManager.removeBill(group.getId(), b.getID());
 				}
+				return true;
+			}else{
+				return false;
 			}
 		}
 		

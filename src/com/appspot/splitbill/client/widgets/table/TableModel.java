@@ -20,7 +20,7 @@ public interface TableModel {
 	public EntryEditor getEditor(int row);
 	public EntryEditor getAdder();
 	
-	public void delete(List<Integer> rowsToDelete);
+	public boolean delete(List<Integer> rowsToDelete);
 	
 	public void addTableModelChangeListener(TableModelChangeListener listener);
 	public void removeTableModelChangeListener(TableModelChangeListener listener);

@@ -116,13 +116,16 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 		}
 
 		@Override
-		public void delete(List<Integer> rowsToDelete) {
+		public boolean delete(List<Integer> rowsToDelete) {
 			int rowCount = rowsToDelete.size();
 			if(rowCount > 0 && promptDelete(rowCount, "\"Gets\"")){
 				for(Integer i : rowsToDelete){
 					Gets g = getEntry(i);
 					groupManager.removeGets(group.getId(), bill.getID(), g.getId());
 				}
+				return true;
+			}else{
+				return false;
 			}
 		}
 		
