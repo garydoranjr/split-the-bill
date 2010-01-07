@@ -35,8 +35,16 @@ public class ServiceStatic {
 		return user;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void checkThisUser(User user, GroupJDO group, long personID) throws ServiceException{
+		checkUser(user, group, personID, true);
+	}
+	
+	public static void checkNotThisUser(User user, GroupJDO group, long personID) throws ServiceException{
+		checkUser(user, group, personID, false);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static void checkUser(User user, GroupJDO group, long personID, boolean assertThis) throws ServiceException{
 		PersistenceManager pm = ServiceStatic.getPersistenceManager();
 		try{
 			Query q = pm.newQuery(PersonJDO.class,"user == u");
@@ -45,10 +53,16 @@ public class ServiceStatic {
 			for(PersonJDO person : persons){
 				if(person.getKey().getId() == personID &&
 						group.getId() == person.getGroup().getId()){
-					return;
+					if(assertThis){
+						return;
+					}else{
+						throw new ServiceException(ExceptionType.UNAUTHORIZED);
+					}
 				}
 			}
-			throw new ServiceException(ExceptionType.UNAUTHORIZED);
+			if(assertThis){
+				throw new ServiceException(ExceptionType.UNAUTHORIZED);
+			}
 		}finally{
 			pm.close();
 		}

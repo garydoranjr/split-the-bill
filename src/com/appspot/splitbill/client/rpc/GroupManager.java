@@ -32,6 +32,7 @@ public class GroupManager {
 	private GroupServiceAsync groupService;
 	private EARServiceAsync earService;
 	private SettingsServiceAsync setService;
+	private LoginManager loginManager;
 	
 	private ArrayList<GroupThumbnail> cachedThumbs = null;
 	private HashMap<Long, Group> groups = new HashMap<Long, Group>();
@@ -40,11 +41,13 @@ public class GroupManager {
 	public GroupManager(GroupServiceAsync groupService,
 						EARServiceAsync earService,
 						SettingsServiceAsync setService,
+						LoginManager loginManager,
 						EventBus eventBus){
 		this.eventBus = eventBus;
 		this.groupService = groupService;
 		this.earService = earService;
 		this.setService = setService;
+		this.loginManager = loginManager;
 	}
 	
 	public void updateThumbs(){
@@ -133,16 +136,28 @@ public class GroupManager {
 		});
 	}
 	
-	public void removePerson(final long groupID, final long personID){
-		incrAsync();
-		earService.removePerson(groupID, personID, new AACB<Void>(){
-			@Override
-			public void processResult(Void result) {
-				Group changedGroup = groups.get(groupID);
-				changedGroup.removePerson(personID);
-				groupUpdated(GroupUpdateType.PERSONS, changedGroup);
-			}
-		});
+	public boolean removePerson(final long groupID, final long personID){
+		Group group = groups.get(groupID);
+		ClientUser user = loginManager.getInfo().getUserInfo();
+		if(group == null){
+			return false;
+		}
+		Person loggedInPerson = group.getPerson(user);
+		if(loggedInPerson.getID() == personID){
+			eventBus.fireEvent(new NotificationEvent(NotificationEventType.NOTIFY, "You cannot delete yourself.", 5000));
+			return false;
+		}else{
+			incrAsync();
+			earService.removePerson(groupID, personID, new AACB<Void>(){
+				@Override
+				public void processResult(Void result) {
+					Group changedGroup = groups.get(groupID);
+					changedGroup.removePerson(personID);
+					groupUpdated(GroupUpdateType.PERSONS, changedGroup);
+				}
+			});
+			return true;
+		}
 	}
 	
 	public void addPerson(final long groupID, final Person toAdd){

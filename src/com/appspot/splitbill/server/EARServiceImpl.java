@@ -55,6 +55,7 @@ public class EARServiceImpl  extends RemoteServiceServlet implements EARService{
 			Key key = new KeyFactory.Builder(GroupJDO.class.getSimpleName(), groupID).addChild(PersonJDO.class.getSimpleName(), personID).getKey();
 			PersonJDO person = pm.getObjectById(PersonJDO.class, key);
 			ServiceStatic.checkAdmin(user, person.getGroup());
+			ServiceStatic.checkNotThisUser(user, person.getGroup(), personID);
 			pm.deletePersistent(person);
 		}finally{
 			pm.close();
