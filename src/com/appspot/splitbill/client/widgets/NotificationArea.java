@@ -62,8 +62,8 @@ public class NotificationArea extends Composite implements NotificationHandler{
 		if(message != null){
 			text += ": \""+message+"\"";
 		}
-		text += ". Please refresh your browser.";
-		textArea.setText(text);
+		text += ". Please <a href=\"javascript:location.reload();\">refresh</a> your browser.";
+		textArea.getElement().setInnerHTML(text);
 		getWidget().removeStyleName(style.hidden());
 	}
 
