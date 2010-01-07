@@ -9,24 +9,32 @@ public class NotificationEvent extends GwtEvent<NotificationEvent.NotificationHa
 	
 	private NotificationEventType type;
 	private String message;
+	private int ms = 1000;
 	
 	public NotificationEvent(NotificationEventType type){
 		this(type, null);
 	}
 	
 	public NotificationEvent(NotificationEventType type, String message){
+		this(type, message, 1000);
+	}
+	
+	public NotificationEvent(NotificationEventType type, String message, int dispTimeMS){
 		this.type = type;
 		this.message = message;
+		this.ms = dispTimeMS;
 	}
 	
 	public static interface NotificationHandler extends EventHandler {
 		public void loading();
 		public void done();
 		public void error(String message);
+		public void notify(String message, int dispTimeMS);
+		public void dismiss();
 	}
 	
 	public static enum NotificationEventType {
-		LOADING, DONE, ERROR;
+		LOADING, DONE, ERROR, NOTIFY, DISMISS;
 	}
 
 	@Override
@@ -41,6 +49,12 @@ public class NotificationEvent extends GwtEvent<NotificationEvent.NotificationHa
 		case ERROR:
 			handler.error(message);
 			break;
+		case NOTIFY:
+			handler.notify(message, ms);
+			break;
+		case DISMISS:
+			handler.dismiss();
+			break;
 		default:
 			assert false : "Unhandled Type: " + type;
 		}
@@ -49,6 +63,15 @@ public class NotificationEvent extends GwtEvent<NotificationEvent.NotificationHa
 	@Override
 	public com.google.gwt.event.shared.GwtEvent.Type<NotificationHandler> getAssociatedType() {
 		return TYPE;
+	}
+	
+	public static class Notification {
+		public String message;
+		public int dispTimeMS;
+		public Notification(String message, int dispTimeMS){
+			this.message = message;
+			this.dispTimeMS = dispTimeMS;
+		}
 	}
 
 }
