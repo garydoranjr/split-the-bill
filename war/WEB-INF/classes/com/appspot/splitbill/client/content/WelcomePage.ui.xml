@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	h1 {
+		font-size: 22px;
+	}
+	</ui:style>
+	<div>
+		<h1>Welcome to <i>Split the Bill!</i></h1>
+		<h2>What is it?</h2>
+		<p>
+		<b>Split the Bill</b> is an application that allows you to manage
+		splitting a bill or a series of bills between a group of people.
+		</p>
+	</div>
+</ui:UiBinder>

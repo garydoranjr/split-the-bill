@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style type="com.appspot.splitbill.client.widgets.NotificationArea.MyStyle">
+		.area {
+			display: table-cell;
+		}
+		.hidden {
+			visibility: hidden;
+		}
+		.text {
+			font-weight: bold;
+			padding: 2px 5px 0px;
+			background-color: #FFF1A8;
+		}
+		.round * { display: block; height: 1px; overflow: hidden; background-color: #FFF1A8;}
+		.r1 { margin: 0 4px; }
+		.r2 { margin: 0 2px; }
+		.r3 { margin: 0 1px; }
+	</ui:style>
+	<g:HTMLPanel styleName='{style.area}'>
+		<g:Label styleName='{style.text}' ui:field="textArea">Notification</g:Label>
+		<g:HTMLPanel styleName='{style.round}'>
+			<g:HTMLPanel styleName='{style.r3}' />
+			<g:HTMLPanel styleName='{style.r2}' />
+			<g:HTMLPanel styleName='{style.r1}' />
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder> 

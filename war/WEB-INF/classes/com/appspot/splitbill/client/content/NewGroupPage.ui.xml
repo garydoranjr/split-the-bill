@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:e="urn:import:com.appspot.splitbill.client.widgets.editor" >
+	<ui:style>
+	</ui:style>
+	<g:DecoratorPanel>
+		<g:VerticalPanel>
+			<g:Label>Group Name:</g:Label>
+			<e:MinimumLengthTextBox ui:field="nameBox" minLength='3'/>
+			<g:Label>Description:</g:Label>
+			<g:TextArea ui:field="descBox" />
+			<g:HorizontalPanel>
+				<g:Button ui:field="saveButton" >Save</g:Button>
+				<g:Button ui:field="cancelButton" >Cancel</g:Button>
+			</g:HorizontalPanel>
+		</g:VerticalPanel>
+	</g:DecoratorPanel>
+</ui:UiBinder> 
