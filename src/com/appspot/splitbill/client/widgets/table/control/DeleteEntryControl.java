@@ -12,13 +12,14 @@ public class DeleteEntryControl extends AbstractButtonControl {
 	public DeleteEntryControl(final EntryViewer viewer,
 			final TableModel model, final int row){
 		setText("Delete");
-		setDisableOnClick(true);
 		setHandler(new ClickHandler(){
 				@Override
 				public void onClick(ClickEvent event) {
 					LinkedList<Integer> list = new LinkedList<Integer>();
 					list.add(row);
-					model.delete(list);
+					if(model.delete(list)){
+						disableAll();
+					}
 				}
 			});
 	}

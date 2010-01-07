@@ -40,7 +40,7 @@ public abstract class AbstractButtonControl implements Control {
 		return retVal;
 	}
 	
-	private void disableAll(){
+	protected void disableAll(){
 		for(ButtonControlWidget but : toDisable){
 			but.setEnabled(false);
 		}
