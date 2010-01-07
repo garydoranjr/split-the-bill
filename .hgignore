@@ -3,3 +3,5 @@ syntax: regexp
 ^war/WEB-INF/appengine-generated$
 syntax: regexp
 ^war/splitbill$
+syntax: regexp
+^war/WEB-INF/classes$
