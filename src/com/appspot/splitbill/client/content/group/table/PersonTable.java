@@ -12,8 +12,10 @@ import com.appspot.splitbill.client.Person.PersonColumn;
 import com.appspot.splitbill.client.content.group.GroupContent;
 import com.appspot.splitbill.client.event.EventBus;
 import com.appspot.splitbill.client.event.GroupUpdateEvent;
+import com.appspot.splitbill.client.event.NotificationEvent;
 import com.appspot.splitbill.client.event.GroupUpdateEvent.GroupUpdateHandler;
 import com.appspot.splitbill.client.event.GroupUpdateEvent.GroupUpdateType;
+import com.appspot.splitbill.client.event.NotificationEvent.NotificationEventType;
 import com.appspot.splitbill.client.rpc.GroupManager;
 import com.appspot.splitbill.client.rpc.LoginManager;
 import com.appspot.splitbill.client.widgets.editor.DoubleSumTextBox;
@@ -34,6 +36,7 @@ public class PersonTable implements GroupContent, GroupUpdateHandler{
 
 	private LoginManager loginManager;
 	private GroupManager groupManager;
+	private EventBus eventBus;
 	private Group group;
 	private EntryTableModel<Person, PersonColumn> model;
 	private HandlerRegistration registration;
@@ -44,6 +47,7 @@ public class PersonTable implements GroupContent, GroupUpdateHandler{
 			Group group){
 		this.loginManager = loginManager;
 		this.groupManager = groupManager;
+		this.eventBus = eventBus;
 		this.group = group;
 		model = new PersonTableModel(Person.newInstance());
 		model.setEntries(group.getPeople());
@@ -98,12 +102,34 @@ public class PersonTable implements GroupContent, GroupUpdateHandler{
 		@Override
 		public boolean delete(List<Integer> rowsToDelete) {
 			int rowCount = rowsToDelete.size();
-			if(rowCount > 0 && promptDelete(rowCount, "Person")){
+			
+			ClientUser user = loginManager.getInfo().getUserInfo();
+			long currentPerson = group.getPerson(user).getID();
+			
+			// If there are users and they are all the
+			// logged in person, immediately display
+			// notification and return
+			oneOther : {
 				for(Integer i : rowsToDelete){
 					Person p = getEntry(i);
-					groupManager.removePerson(group.getId(), p.getID());
+					if(p.getID() != currentPerson){
+						break oneOther;
+					}
 				}
-				return true;
+				if(rowCount > 0){
+					eventBus.fireEvent(new NotificationEvent(NotificationEventType.NOTIFY,
+							"You cannot delete yourself.", 5000));
+					return false;
+				}
+			}
+			
+			if(rowCount > 0 && promptDelete(rowCount, "Person")){
+				boolean allSuccessful = true;
+				for(Integer i : rowsToDelete){
+					Person p = getEntry(i);
+					allSuccessful &= groupManager.removePerson(group.getId(), p.getID());
+				}
+				return allSuccessful;
 			}else{
 				return false;
 			}

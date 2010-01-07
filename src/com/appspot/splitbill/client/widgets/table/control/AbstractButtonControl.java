@@ -19,8 +19,8 @@ public abstract class AbstractButtonControl implements Control {
 	@Override
 	public ButtonControlWidget generateWidget() {
 		final ButtonControlWidget retVal = new ButtonControlWidget(getText(), getHandler());
+		toDisable.add(retVal);
 		if(disableOnClick){
-			toDisable.add(retVal);
 			retVal.addClickHandler(new ClickHandler(){
 				@Override
 				public void onClick(ClickEvent event) {
