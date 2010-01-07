@@ -102,12 +102,12 @@ public abstract class AbstractTableModel<E> implements TableModel {
 		String message = "Are you sure you want to permanently delete ";
 		String term;
 		if(terms.length > 0){
-			term = " " + terms[Math.max(howMany, terms.length)];
+			term = " " + terms[Math.min(howMany, terms.length - 1)];
 		}else{
 			term = "";
 		}
 		if(howMany > 1){
-			message += "these" + howMany + term + " entries.";
+			message += "these " + howMany + term + " entries.";
 		}else{
 			message += "this" + term + " entry.";
 		}
