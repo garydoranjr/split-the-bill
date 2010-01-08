@@ -8,7 +8,6 @@ import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.util.Formatting;
 import com.appspot.splitbill.client.widgets.table.Column;
 import com.appspot.splitbill.client.widgets.table.Entry;
-import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -104,10 +103,7 @@ public class Pays implements Serializable, Entry<Pays, Pays.PaysColumn> {
 	}
 	
 	public String getNiceDate(){
-		if(date == null){
-			return "";
-		}
-		return DateTimeFormat.getMediumDateFormat().format(date);
+		return Formatting.formatDate(date);
 	}
 	
 	public static enum PaysColumn implements Column{
