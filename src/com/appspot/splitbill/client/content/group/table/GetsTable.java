@@ -6,6 +6,7 @@ import com.appspot.splitbill.client.Bill;
 import com.appspot.splitbill.client.Gets;
 import com.appspot.splitbill.client.Group;
 import com.appspot.splitbill.client.Gets.GetsColumn;
+import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.content.group.GroupContent;
 import com.appspot.splitbill.client.event.EventBus;
 import com.appspot.splitbill.client.event.GroupUpdateEvent;
@@ -23,7 +24,8 @@ import com.appspot.splitbill.client.widgets.table.Table;
 import com.appspot.splitbill.client.widgets.table.Table.EntryMode;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 
 public class GetsTable implements GroupContent, GroupUpdateHandler{
@@ -136,7 +138,7 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 		private Gets entry;
 		private PersonListBox getter;
 		private DoubleSumTextBox amountBox;
-		private TextBox memoBox;
+		private SuggestBox memoBox;
 		
 		public GetsEditor(Gets entry, boolean forAdder) {
 			super(entry, forAdder);
@@ -154,7 +156,9 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 			amountBox = new DoubleSumTextBox();
 			amountBox.setValue(0d);
 			
-			memoBox = new TextBox();
+			MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+			oracle.addAll(group.getSuggestions(SuggestionType.GETS_DESC));
+			memoBox = new SuggestBox(oracle);
 			memoBox.setValue("");
 		}
 
