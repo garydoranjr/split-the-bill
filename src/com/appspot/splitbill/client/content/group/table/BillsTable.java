@@ -5,6 +5,7 @@ import java.util.List;
 import com.appspot.splitbill.client.Bill;
 import com.appspot.splitbill.client.Group;
 import com.appspot.splitbill.client.Bill.BillColumn;
+import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.content.group.GroupContent;
 import com.appspot.splitbill.client.event.EventBus;
 import com.appspot.splitbill.client.event.GroupUpdateEvent;
@@ -24,6 +25,8 @@ import com.appspot.splitbill.client.widgets.table.Table;
 import com.appspot.splitbill.client.widgets.table.Table.EntryMode;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.MultiWordSuggestOracle;
+import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DatePicker;
@@ -130,8 +133,8 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 		private Bill entry;
 		
 		private DatePicker datePicker;
-		private TextBox payeeBox;
-		private TextBox descBox;
+		private SuggestBox payeeBox;
+		private SuggestBox descBox;
 		private DoubleSumTextBox amountBox;
 		private PersonListBox buyerList;
 		
@@ -145,10 +148,14 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 			datePicker = new DatePicker();
 			datePicker.setValue(entry.getDate());
 			
-			payeeBox = new TextBox();
+			MultiWordSuggestOracle oracle = new MultiWordSuggestOracle();
+			oracle.addAll(group.getSuggestions(SuggestionType.BILL_PAYEE));
+			payeeBox = new SuggestBox(oracle);
 			payeeBox.setValue(entry.getPayee());
 			
-			descBox = new TextBox();
+			MultiWordSuggestOracle oracle2 = new MultiWordSuggestOracle();
+			oracle2.addAll(group.getSuggestions(SuggestionType.BILL_DESC));
+			descBox = new SuggestBox(oracle2);
 			descBox.setValue(entry.getDescription());
 			
 			amountBox = new DoubleSumTextBox();
