@@ -3,6 +3,7 @@ package com.appspot.splitbill.client;
 import java.io.Serializable;
 import java.util.Comparator;
 
+import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.util.Formatting;
 import com.appspot.splitbill.client.widgets.table.Column;
 import com.appspot.splitbill.client.widgets.table.Entry;
@@ -40,6 +41,9 @@ public class Gets implements Serializable, Entry<Gets, Gets.GetsColumn> {
 
 	public void setParent(Group parent){
 		this.parent = parent;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.GETS_DESC, description);
+		}
 	}
 	
 	public long getId() {
@@ -68,6 +72,9 @@ public class Gets implements Serializable, Entry<Gets, Gets.GetsColumn> {
 
 	public void setDescription(String description) {
 		this.description = description;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.GETS_DESC, description);
+		}
 	}
 
 	public String getDescription() {

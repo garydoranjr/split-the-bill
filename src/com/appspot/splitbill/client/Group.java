@@ -3,7 +3,11 @@ package com.appspot.splitbill.client;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class Group implements Serializable {
 
@@ -15,11 +19,34 @@ public class Group implements Serializable {
 	private List<Bill> bills = new ArrayList<Bill>();
 	private List<Pays> pays = new ArrayList<Pays>();
 	
+	private Map<SuggestionType, Set<String>> suggestions = new HashMap<SuggestionType, Set<String>>();
+	
+	public static enum SuggestionType {
+		BILL_DESC, BILL_PAYEE, GETS_DESC, PAYS_DESC;
+	}
+	
 	public Group(){}
 	
 	public Group(long id){
 		this();
 		this.id = id;
+	}
+	
+	public void addSuggestion(SuggestionType type, String suggestion){
+		Set<String> suggestionSet = suggestions.get(type);
+		if(suggestionSet == null){
+			suggestionSet = new HashSet<String>();
+			suggestions.put(type, suggestionSet);
+		}
+		suggestionSet.add(suggestion);
+	}
+	
+	public Set<String> getSuggestions(SuggestionType type){
+		Set<String> suggestionSet = suggestions.get(type);
+		if(suggestionSet == null){
+			suggestionSet = new HashSet<String>();
+		}
+		return suggestionSet;
 	}
 	
 	public GroupThumbnail getThumbnail(){

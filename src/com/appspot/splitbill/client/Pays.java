@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
 
+import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.util.Formatting;
 import com.appspot.splitbill.client.widgets.table.Column;
 import com.appspot.splitbill.client.widgets.table.Entry;
@@ -46,6 +47,9 @@ public class Pays implements Serializable, Entry<Pays, Pays.PaysColumn> {
 	
 	public void setParent(Group parent){
 		this.parent = parent;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.PAYS_DESC, description);
+		}
 	}
 
 	public long getID() {
@@ -82,6 +86,9 @@ public class Pays implements Serializable, Entry<Pays, Pays.PaysColumn> {
 
 	public void setDescription(String description) {
 		this.description = description;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.PAYS_DESC, description);
+		}
 	}
 
 	public String getDescription() {

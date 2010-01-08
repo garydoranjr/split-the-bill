@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import com.appspot.splitbill.client.Group.SuggestionType;
 import com.appspot.splitbill.client.util.Formatting;
 import com.appspot.splitbill.client.widgets.table.Column;
 import com.appspot.splitbill.client.widgets.table.Entry;
@@ -59,6 +60,10 @@ public class Bill implements Serializable, Entry<Bill, Bill.BillColumn>{
 		for(Gets get : gets){
 			get.setParent(parent);
 		}
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.BILL_PAYEE, payee);
+			parent.addSuggestion(SuggestionType.BILL_DESC, description);
+		}
 	}
 
 	public long getID() {
@@ -90,6 +95,9 @@ public class Bill implements Serializable, Entry<Bill, Bill.BillColumn>{
 
 	public void setPayee(String payee) {
 		this.payee = payee;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.BILL_PAYEE, payee);
+		}
 	}
 
 	public String getPayee() {
@@ -98,6 +106,9 @@ public class Bill implements Serializable, Entry<Bill, Bill.BillColumn>{
 
 	public void setDescription(String description) {
 		this.description = description;
+		if(parent != null){
+			parent.addSuggestion(SuggestionType.BILL_DESC, description);
+		}
 	}
 
 	public String getDescription() {
