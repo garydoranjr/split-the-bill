@@ -7,8 +7,10 @@
 			width: 100%;	
 		}
 		.logo {
-			height: 30px;
-  			padding: 2px;
+			/*height: 30px;*/
+  			padding-top: 5px;
+  			padding-left: 5px;
+  			padding-bottom: 2px;
 		}
 		.links {
 			padding: 10px;
@@ -19,7 +21,7 @@
 	<g:VerticalPanel addStyleNames='{style.wide}'>
 	
 		<g:HorizontalPanel ui:field='headerPanel' addStyleNames='{style.wide}'>
-			<g:Image ui:field="logo" url="img/logo_big2.png" styleName='{style.logo}' />
+			<g:Image ui:field="logo" url="img/logo50.png" styleName='{style.logo}' />
 			<my:NotificationArea ui:field='notificationArea' />
 			<g:HorizontalPanel ui:field='linksArea' styleName='{style.links}' />
 		</g:HorizontalPanel>
