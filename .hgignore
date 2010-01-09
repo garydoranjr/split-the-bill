@@ -5,3 +5,7 @@ syntax: regexp
 ^war/splitbill$
 syntax: regexp
 ^war/WEB-INF/classes$
+syntax: regexp
+^war/img/Thumbs\.db$
+syntax: regexp
+^war/Thumbs\.db$
