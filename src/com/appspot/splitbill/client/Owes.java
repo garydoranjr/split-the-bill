@@ -19,11 +19,15 @@ public class Owes {
 	}
 
 	public double getAmount() {
-		return amount;
+		if(Math.abs(amount) < .01){
+			return 0d;
+		}else{
+			return amount;
+		}
 	}
 	
 	public String getNiceAmount(){
-		return Formatting.formatAmount(amount);
+		return Formatting.formatAmount(getAmount());
 	}
 
 	public void setPersonID(long personID) {
