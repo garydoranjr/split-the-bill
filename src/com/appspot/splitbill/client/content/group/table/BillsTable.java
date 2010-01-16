@@ -94,11 +94,7 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 
 		@Override
 		protected EntryEditor getEditor(Bill entry, boolean forAdder) {
-			if(forAdder){
-				return new BillEditor(entry, true);
-			}else{
-				return new SpecialBillEditor(entry);
-			}
+			return new SpecialBillEditor(entry, forAdder);
 		}
 		
 		@Override
@@ -231,7 +227,7 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 		
 		public BillViewer(Bill entry){
 			viewer = new DefaultEntryViewer<Bill, BillColumn>(entry);
-			gTable = new GetsTable(loginManager, groupManager, eventBus, group, entry);
+			gTable = new GetsTable(loginManager, groupManager, eventBus, group, entry, false);
 			viewerPanel = new SpecialBillViewer();
 			viewerPanel.getPanel().add(viewer.getPanelWidget());
 			viewerPanel.addSeparator();
@@ -259,9 +255,10 @@ public class BillsTable implements GroupContent, GroupUpdateHandler {
 		private SpecialBillViewer viewerPanel;
 		private BillEditor editor;
 		
-		public SpecialBillEditor(Bill entry){
-			editor = new BillEditor(entry, false);
-			gTable = new GetsTable(loginManager, groupManager, eventBus, group, entry);
+		public SpecialBillEditor(Bill entry, boolean forAdder){
+			editor = new BillEditor(entry, forAdder);
+			entry.setParentWithoutSuggestion(group);
+			gTable = new GetsTable(loginManager, groupManager, eventBus, group, entry, forAdder);
 			viewerPanel = new SpecialBillViewer();
 			viewerPanel.getPanel().add(editor.getPanelWidget());
 			viewerPanel.addSeparator();
