@@ -118,6 +118,17 @@ public class EARServiceImpl  extends RemoteServiceServlet implements EARService{
 					bill.getDescription(),
 					bill.getAmount());
 			group.addBill(persistBill);
+			
+			// Add Gets
+			for(Gets gets : bill.getGets()){
+				Key personKey = new KeyFactory.Builder(GroupJDO.class.getSimpleName(), groupID).addChild(PersonJDO.class.getSimpleName(), gets.getPersonID()).getKey();
+				GetsJDO persistGets = new GetsJDO(persistBill,
+						personKey,
+						gets.getAmount(),
+						gets.getDescription());
+				persistBill.addGets(persistGets);
+			}
+			
 			pm.close();
 			Bill retVal = new Bill(persistBill.getKey().getId());
 			retVal.setAmount(persistBill.getAmount());
@@ -125,6 +136,15 @@ public class EARServiceImpl  extends RemoteServiceServlet implements EARService{
 			retVal.setDate(persistBill.getDate());
 			retVal.setDescription(persistBill.getDescription());
 			retVal.setPayee(persistBill.getPayee());
+			
+			for(GetsJDO persistGets : persistBill.getGets()){
+				Gets gets = new Gets(persistGets.getKey().getId());
+				gets.setAmount(persistGets.getAmount());
+				gets.setDescription(persistGets.getDescription());
+				gets.setPersonID(persistGets.getPerson().getId());
+				retVal.addGets(gets);
+			}
+			
 			return retVal;
 		}finally{
 			if(!pm.isClosed()){
