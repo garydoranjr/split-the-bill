@@ -47,11 +47,18 @@ public class Bill implements Serializable, Entry<Bill, Bill.BillColumn>{
 			}
 		}
 	}
-
+	
 	public static Bill newInstance() {
 		Bill b = new Bill();
 		b.date = new Date();
 		return b;
+	}
+	
+	public void setParentWithoutSuggestion(Group parent){
+		this.parent = parent;
+		for(Gets get : gets){
+			get.setParentWithoutSuggestion(parent);
+		}
 	}
 	
 	public void setParent(Group parent){
@@ -221,6 +228,12 @@ public class Bill implements Serializable, Entry<Bill, Bill.BillColumn>{
 		default:
 			assert false : c;
 			return null;
+		}
+	}
+
+	public void removeGets(Gets g) {
+		if(this.gets.remove(g)){
+			g.setParent(null);
 		}
 	}
 	

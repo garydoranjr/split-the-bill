@@ -38,6 +38,10 @@ public class Gets implements Serializable, Entry<Gets, Gets.GetsColumn> {
 	public static Gets newInstance() {
 		return new Gets();
 	}
+	
+	public void setParentWithoutSuggestion(Group parent){
+		this.parent = parent;
+	}
 
 	public void setParent(Group parent){
 		this.parent = parent;
