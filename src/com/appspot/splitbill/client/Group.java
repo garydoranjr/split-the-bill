@@ -33,12 +33,14 @@ public class Group implements Serializable {
 	}
 	
 	public void addSuggestion(SuggestionType type, String suggestion){
-		Set<String> suggestionSet = suggestions.get(type);
-		if(suggestionSet == null){
-			suggestionSet = new HashSet<String>();
-			suggestions.put(type, suggestionSet);
+		if(suggestion != null){
+			Set<String> suggestionSet = suggestions.get(type);
+			if(suggestionSet == null){
+				suggestionSet = new HashSet<String>();
+				suggestions.put(type, suggestionSet);
+			}
+			suggestionSet.add(suggestion);
 		}
-		suggestionSet.add(suggestion);
 	}
 	
 	public Set<String> getSuggestions(SuggestionType type){
