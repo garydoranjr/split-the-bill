@@ -41,14 +41,17 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 			GroupManager groupManager,
 			EventBus eventBus,
 			Group group,
-			Bill bill){
+			Bill bill,
+			boolean renderFromBill){
 		this.loginManager = loginManager;
 		this.groupManager = groupManager;
 		this.group = group;
 		this.bill = bill;
-		model = new GetsTableModel(Gets.newInstance());
+		model = new GetsTableModel(Gets.newInstance(), renderFromBill);
 		model.setEntries(bill.getGets());
-		registration = eventBus.addHandler(GroupUpdateEvent.TYPE, this);
+		if(!renderFromBill){
+			registration = eventBus.addHandler(GroupUpdateEvent.TYPE, this);
+		}
 	}
 
 	@Override
@@ -90,14 +93,17 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 
 	public class GetsTableModel extends EntryTableModel<Gets, GetsColumn> {
 
-		public GetsTableModel(Gets entryInstance) {
+		private boolean renderFromBill;
+		
+		public GetsTableModel(Gets entryInstance, boolean renderFromBill) {
 			super(entryInstance);
+			this.renderFromBill = renderFromBill;
 		}
 
 		@Override
 		protected EntryEditor getEditor(Gets entry, boolean forAdder) {
 			if(forAdder){
-				return new GetsEditor(entry, forAdder);
+				return new GetsEditor(entry, forAdder, renderFromBill);
 			}else{
 				return new EntryEditor(){
 					@Override
@@ -123,7 +129,12 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 			if(rowCount > 0 && promptDelete(rowCount, "\"Gets\"")){
 				for(Integer i : rowsToDelete){
 					Gets g = getEntry(i);
-					groupManager.removeGets(group.getId(), bill.getID(), g.getId());
+					if(renderFromBill){
+						bill.removeGets(g);
+						model.setEntries(bill.getGets());
+					}else{
+						groupManager.removeGets(group.getId(), bill.getID(), g.getId());
+					}
 				}
 				return true;
 			}else{
@@ -139,12 +150,14 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 		private PersonListBox getter;
 		private DoubleSumTextBox amountBox;
 		private SuggestBox memoBox;
+		private boolean renderFromBill;
 		
-		public GetsEditor(Gets entry, boolean forAdder) {
+		public GetsEditor(Gets entry, boolean forAdder, boolean renderFromBill) {
 			super(entry, forAdder);
 			if(!forAdder){
 				throw new RuntimeException("Cannont edit GETS");
 			}
+			this.renderFromBill = renderFromBill;
 			this.entry = entry;
 		}
 		
@@ -193,7 +206,12 @@ public class GetsTable implements GroupContent, GroupUpdateHandler{
 			g.setDescription(memoBox.getValue());
 			g.setAmount(amountBox.getValue());
 			g.setPersonID(getter.getSelectedID());
-			groupManager.addGet(group.getId(), bill.getID(), g);
+			if(renderFromBill){
+				GetsTable.this.bill.addGets(g);
+				GetsTable.this.model.setEntries(bill.getGets());
+			}else{
+				groupManager.addGet(group.getId(), bill.getID(), g);
+			}
 		}
 		
 		@Override
