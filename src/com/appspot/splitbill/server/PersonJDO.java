@@ -18,7 +18,7 @@ public class PersonJDO {
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 	
-	@Persistent
+	@Persistent(defaultFetchGroup = "true")
 	private GroupJDO group;
 	
 	@Persistent
