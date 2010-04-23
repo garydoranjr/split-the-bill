@@ -29,7 +29,7 @@ public class BillJDO {
 	private String description;
 	@Persistent
 	private double amount;
-	@Persistent(mappedBy = "order")
+	@Persistent(mappedBy = "order", defaultFetchGroup = "true")
 	private List<GetsJDO> gets;
 	
 	public BillJDO(){}

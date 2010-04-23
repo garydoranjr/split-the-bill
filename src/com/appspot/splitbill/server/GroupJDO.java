@@ -26,13 +26,13 @@ public class GroupJDO {
 	@Persistent
 	private String password;
 	
-	@Persistent(mappedBy = "group")
+	@Persistent(mappedBy = "group", defaultFetchGroup = "true")
 	private List<BillJDO> bills;
 	
-	@Persistent(mappedBy = "group")
+	@Persistent(mappedBy = "group", defaultFetchGroup = "true")
 	private List<PersonJDO> members;
 	
-	@Persistent(mappedBy = "group")
+	@Persistent(mappedBy = "group", defaultFetchGroup = "true")
 	private List<PaysJDO> payments;
 
 	public GroupJDO() {}
