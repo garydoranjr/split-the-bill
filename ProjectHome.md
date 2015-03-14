@@ -1,0 +1,1 @@
+Split the Bill is a web application written with GWT used for splitting bills across a group of people.
